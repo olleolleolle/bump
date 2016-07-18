@@ -46,7 +46,7 @@ class Dependency
     @changelog_url_lookup_attempted = true
 
     files = Github.client.contents(github_repo)
-    file = files.find { |f| CHANGELOG_NAMES.any? { |w| f.name =~ /#{w}/i } }
+    file = files.find { |f| CHANGELOG_NAMES.any? { |w| f.name =~ /\A#{w}/i } }
 
     @changelog_url = file.nil? ? nil : file.html_url
   rescue Octokit::NotFound
